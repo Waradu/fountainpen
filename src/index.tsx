@@ -1,5 +1,6 @@
 import { renderFullScreen } from "./fullscreen";
 export * from "./router";
+export * from "./components/ink";
 
 export const render = (element: React.ReactNode) => {
   const enterAltScreenCommand = "\x1b[?1049h";
