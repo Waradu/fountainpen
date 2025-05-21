@@ -5,8 +5,9 @@ the ink framework
 features:
 
 - Router ✨
-- Fullscreen renderer
+- ~~Fullscreen renderer~~ (use `fullscreen-ink` instead)
 - Extends ink elements
+- Custom hooks
 
 ### Router ✨
 
@@ -70,18 +71,6 @@ function Error() {
 }
 ```
 
-### Fullscreen renderer
-
-A fullscreen renderer
-
-```diff
-import App from "./app";
-- import { render } from "ink";
-+ import { render } from "fountainpen";
-
-render(<App />);
-```
-
 ### Extends ink elements
 
 ```diff
@@ -93,3 +82,7 @@ render(<App />);
 - <Box width={"100%"} height={"100%"}></Box>
 + <Box size={"100%"}></Box>
 ```
+
+### Hooks
+
+- `useScreenSize` -> get width, height of terminal screen.
