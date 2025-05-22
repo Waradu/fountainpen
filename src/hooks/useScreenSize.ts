@@ -6,7 +6,7 @@ interface Dimensions {
   width: number;
 }
 
-export const useScreenSize = () => {
+export const useScreenSize = (cb?: () => void) => {
   const { stdout } = useStdout();
   const [dimensions, setDimensions] = useState<Dimensions>({
     height: stdout.columns,
@@ -14,11 +14,13 @@ export const useScreenSize = () => {
   });
 
   useEffect(() => {
-    const handler = () =>
+    const handler = () => {
+      if (cb) cb();
       setDimensions({
         height: stdout.columns,
         width: stdout.rows,
       });
+    };
     stdout.on("resize", handler);
     return () => {
       stdout.off("resize", handler);
