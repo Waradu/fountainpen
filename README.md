@@ -4,10 +4,11 @@ the ink framework
 
 features:
 
-- Router ✨
+- [Router ✨](#router-)
 - ~~Fullscreen renderer~~ (use `fullscreen-ink` instead)
-- Extends ink elements
-- Custom hooks
+- [Extened ink elements](#extened-ink-elements)
+- [Global input handler](#global-input-handler)
+- [Custom hooks](#hooks)
 
 ### Router ✨
 
@@ -71,7 +72,7 @@ function Error() {
 }
 ```
 
-### Extends ink elements
+### Extened ink elements
 
 ```diff
 - import { Box } from "ink";
@@ -81,6 +82,32 @@ function Error() {
 ```diff
 - <Box width={"100%"} height={"100%"}></Box>
 + <Box size={"100%"}></Box>
+```
+
+### Global input handler
+
+A global and more performant way to manage user input.
+
+```tsx
+render(
+  <GlobalInputProvider>
+    <App />
+  </GlobalInputProvider>
+);
+```
+
+```tsx
+export default function App() {
+  const { exit } = useApp();
+
+  useGlobalInput((input, key) => {
+    if (key.ctrl && input.toLowerCase() == "q") {
+      exit();
+    }
+  });
+
+  return <Text>Hello, World!</Text>;
+}
 ```
 
 ### Hooks
