@@ -47,7 +47,27 @@ export function Router({ default: defaultPath, fallback, children }: Props) {
   const [path, setPath] = useState(defaultPath || "/");
 
   const navigate = (to: string) => {
-    setPath(nodePath.resolve(path, to) as Path);
+    if (to.startsWith("/")) {
+      setPath(to as Path);
+    } else {
+      const currentParts = path.slice(1).split("/");
+      const toParts = to.split("/");
+      const resolvedParts: string[] = [];
+
+      resolvedParts.push(...currentParts.slice(0, -1));
+
+      for (const part of toParts) {
+        if (part === "..") {
+          if (resolvedParts.length > 0) {
+            resolvedParts.pop();
+          }
+        } else if (part !== "." && part !== "") {
+          resolvedParts.push(part);
+        }
+      }
+
+      setPath(`/${resolvedParts.join("/")}` as Path);
+    }
   };
 
   if (!Array.isArray(children)) children = [children];
