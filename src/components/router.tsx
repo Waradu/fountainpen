@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
 import { Text } from "ink";
-import nodePath from "path";
 
 type Path = `/${string}`;
 
