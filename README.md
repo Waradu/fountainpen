@@ -5,10 +5,16 @@ the ink framework
 features:
 
 - [Router ✨](#router-)
-- ~~Fullscreen renderer~~ (use `fullscreen-ink` instead)
+- [Components](#components) `NEW`
 - [Extened ink elements](#extened-ink-elements)
 - [Global input handler](#global-input-handler)
 - [Custom hooks](#hooks)
+
+plans:
+
+- [ ] Fullscreen
+- [x] Allow non Route children
+- [x] Font Renderer
 
 ### Router ✨
 
@@ -17,11 +23,17 @@ A custom router with slugs
 app.tsx
 
 ```tsx
-<Router fallback={<Error />}>
-  <Route path="/" element={<Index />} />
-  <Route path="/products" element={<Products />} />
-  <Route path="/products/:id" element={<Details />} />
-</Router>
+...
+  <Router fallback={<Error />}>
+    <Text>Global Header</Text>
+    <Route path="/" element={<Index />} />
+    <Route path="/products" element={<Products />} />
+    <Route path="/products/:id" element={<Details />} />
+    <Route path="/test">
+      <Text>Test page</Text>
+    </Router>
+  </Router>
+...
 ```
 
 pages/index.tsx
@@ -72,7 +84,28 @@ function Error() {
 }
 ```
 
+### Components
+
+#### Font
+
+Supports all `Text` properties and is 2 lines tall.
+
+<sub>`tiny` font is from `opentui`</sub>.
+
+Currently `tiny` is the only available font and it is also the default.
+
+
+```tsx
+...
+  <Font font="tiny">Tiny Font</Font>
+...
+```
+
+![tiny font](assets/tiny_font.png)
+
 ### Extened ink elements
+
+#### Box
 
 ```diff
 - import { Box } from "ink";

@@ -1,11 +1,18 @@
-import React, { createContext, useContext, useState } from "react";
+import React, {
+  Children,
+  createContext,
+  isValidElement,
+  useContext,
+  useState,
+} from "react";
 import { Text } from "ink";
 
 type Path = `/${string}`;
 
 interface RouteProps {
   path: Path;
-  element: React.ReactNode;
+  element?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export function Route(_: RouteProps): null {
@@ -17,7 +24,7 @@ type RouterChild = React.ReactElement<RouteProps>;
 interface Props {
   default?: Path;
   fallback?: RouterChild;
-  children: RouterChild[] | RouterChild;
+  children: RouterChild[] | RouterChild | React.ReactNode;
 }
 
 function matchRoute(template: string[], route: string[]): boolean {
@@ -43,7 +50,7 @@ function ErrorPage() {
 const RouterProvider = createContext<RouteContext | undefined>(undefined);
 
 export function Router({ default: defaultPath, fallback, children }: Props) {
-  const [path, setPath] = useState(defaultPath || "/");
+  const [path, setPath] = useState<Path>(defaultPath || "/");
 
   const navigate = (to: string) => {
     if (to.startsWith("/")) {
@@ -75,7 +82,12 @@ export function Router({ default: defaultPath, fallback, children }: Props) {
 
   const parts = path.slice(1).split("/");
 
-  const current = children.find((child) => {
+  const routes = Children.toArray(children).filter(
+    (child): child is RouterChild =>
+      isValidElement(child) && child.type === Route
+  );
+
+  const current = routes.find((child) => {
     const template = child.props.path.slice(1).split("/");
 
     return matchRoute(template, parts);
@@ -90,6 +102,10 @@ export function Router({ default: defaultPath, fallback, children }: Props) {
       if (part != parts[i]) slugs.set(part.slice(1), parts[i]!);
     });
 
+  const currentElement = current?.props.element
+    ? current?.props.element
+    : current?.props.children;
+
   return (
     <RouterProvider.Provider
       value={{
@@ -98,7 +114,8 @@ export function Router({ default: defaultPath, fallback, children }: Props) {
         navigate,
       }}
     >
-      {current?.props.element ?? (fallback ? fallback : <ErrorPage />)}
+      {children}
+      {currentElement ?? (fallback ? fallback : <ErrorPage />)}
     </RouterProvider.Provider>
   );
 }
