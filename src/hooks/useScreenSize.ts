@@ -1,31 +1,28 @@
-import { useEffect, useState } from "react";
 import { useStdout } from "ink";
+import { useCallback, useEffect, useState } from "react";
 
-interface Dimensions {
-  height: number;
-  width: number;
-}
-
-export const useScreenSize = (cb?: () => void) => {
+export function useScreenSize() {
   const { stdout } = useStdout();
-  const [dimensions, setDimensions] = useState<Dimensions>({
-    height: stdout.columns,
-    width: stdout.rows,
-  });
+
+  const getDimensions = useCallback(
+    () => ({ height: stdout.rows, width: stdout.columns }),
+    [stdout],
+  );
+
+  const [dimensions, setDimensions] = useState(getDimensions);
 
   useEffect(() => {
-    const handler = () => {
-      if (cb) cb();
-      setDimensions({
-        height: stdout.columns,
-        width: stdout.rows,
-      });
+    const resize = () => {
+      setDimensions(getDimensions());
     };
-    stdout.on("resize", handler);
+
+    stdout.on("resize", resize);
+
     return () => {
-      stdout.off("resize", handler);
+      stdout.off("resize", resize);
     };
-  }, [stdout]);
+
+  }, [stdout, getDimensions]);
 
   return dimensions;
-};
+}
