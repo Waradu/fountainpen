@@ -1,5 +1,5 @@
 import { render } from "ink";
-import { Box, GlobalInputProvider } from "../src/index";
+import { Box, GlobalInputProvider } from "..";
 import App from "./app";
 
 render(
@@ -8,5 +8,5 @@ render(
       <App />
     </Box>
   </GlobalInputProvider>,
-  { exitOnCtrlC: true }
+  { exitOnCtrlC: true },
 );

@@ -5,6 +5,7 @@
   "type": "module",
   "version": "0.3.1",
   "description": "the ink framework",
+  "exports": "./src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/waradu/fountainpen.git"

@@ -1,5 +1,5 @@
 import { Text, Box } from "ink";
-import { Router, Route, Font } from "../src";
+import { Router, Route, Font } from "..";
 
 export default function () {
   return (
