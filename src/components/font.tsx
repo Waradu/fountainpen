@@ -11,7 +11,7 @@ export interface TextProps extends InkTextProps {
   children: string;
 }
 
-function Font({ font = "tiny", children, ...props }: TextProps) {
+export function Font({ font = "tiny", children, ...props }: TextProps) {
   const fontData = getFont(font);
 
   let height = fontData.lines;
@@ -40,5 +40,3 @@ function Font({ font = "tiny", children, ...props }: TextProps) {
     </Box>
   );
 }
-
-export default Font;
