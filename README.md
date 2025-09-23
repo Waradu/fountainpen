@@ -6,7 +6,6 @@ features:
 
 - [Router ✨](#router-)
 - [Components](#components) `NEW`
-- [Extened ink elements](#extened-ink-elements)
 - [Global input handler](#global-input-handler)
 - [Custom hooks](#hooks)
 
@@ -94,7 +93,6 @@ Supports all `Text` properties and is 2 lines tall.
 
 Currently `tiny` is the only available font and it is also the default.
 
-
 ```tsx
 ...
   <Font font="tiny">Tiny Font</Font>
@@ -103,18 +101,34 @@ Currently `tiny` is the only available font and it is also the default.
 
 ![tiny font](assets/tiny_font.png)
 
-### Extened ink elements
-
 #### Box
+
+A siplified box to help you write less.
 
 ```diff
 - import { Box } from "ink";
 + import { Box } from "fountainpen";
 ```
 
+Features:
+
+Combined width and height for squares:
+
 ```diff
-- <Box width={"100%"} height={"100%"}></Box>
-+ <Box size={"100%"}></Box>
+- <Box width={10} height={10} />
++ <Box size={10} />
+```
+
+Better Border with default styles:
+
+```tsx
+<Box border /> // Borders all around
+<Box borderLeft /> // Borders left
+<Box borderX /> // Borders left and right
+<Box border borderTop={false} /> // Borders left, right and bottom
+<Box border borderYColor="red" /> // Color only bottom and top border red
+<Box border borderTopDimColor /> // Dim only top border
+<Box border borderStyle={"arrow"} /> // Arrow borders
 ```
 
 ### Global input handler
@@ -125,7 +139,7 @@ A global and more performant way to manage user input.
 render(
   <GlobalInputProvider>
     <App />
-  </GlobalInputProvider>
+  </GlobalInputProvider>,
 );
 ```
 
