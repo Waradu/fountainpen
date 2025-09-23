@@ -1,6 +1,12 @@
-## Fountainpen
+# Fountainpen
 
 the ink framework
+
+install:
+
+- `npm install fountainpen`
+- `bun install fountainpen`
+
 
 features:
 
@@ -8,6 +14,7 @@ features:
 - [Components](#components) `NEW`
 - [Global input handler](#global-input-handler)
 - [Custom hooks](#hooks)
+- [Credits](#credits)
 
 plans:
 
@@ -15,7 +22,7 @@ plans:
 - [x] Allow non Route children
 - [x] Font Renderer
 
-### Router ✨
+## Router ✨
 
 A custom router with slugs
 
@@ -83,13 +90,11 @@ function Error() {
 }
 ```
 
-### Components
+## Components
 
-#### Font
+### Font
 
 Supports all `Text` properties and is 2 lines tall.
-
-<sub>`tiny` font is from `opentui`</sub>.
 
 Currently `tiny` is the only available font and it is also the default.
 
@@ -101,7 +106,7 @@ Currently `tiny` is the only available font and it is also the default.
 
 ![tiny font](assets/tiny_font.png)
 
-#### Box
+### Box
 
 A siplified box to help you write less.
 
@@ -110,7 +115,7 @@ A siplified box to help you write less.
 + import { Box } from "fountainpen";
 ```
 
-Features:
+#### Features:
 
 Combined width and height for squares:
 
@@ -131,7 +136,7 @@ Better Border with default styles:
 <Box border borderStyle={"arrow"} /> // Arrow borders
 ```
 
-### Global input handler
+## Global input handler
 
 A global and more performant way to manage user input.
 
@@ -157,6 +162,14 @@ export default function App() {
 }
 ```
 
-### Hooks
+## Hooks
 
 - `useScreenSize` -> get width, height of terminal screen.
+
+## Credits
+
+Some of the features in this framework are inspired by existing Ink packages. Since many of them haven't been maintained for a while, and a few no longer work, I built updated versions directly into `fountainpen`.
+
+- `useScreenSize` Hook -> [fullscreen-ink](https://github.com/DaniGuardiola/fullscreen-ink)
+- `Table` Component -> [ink-table](https://github.com/DaniGuardiola/fullscreen-ink)
+- `Tiny` Font -> [opentui](https://github.com/sst/opentui)
