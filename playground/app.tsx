@@ -1,6 +1,5 @@
 import { Text } from "ink";
-import { Router, Route, Font, Box } from "..";
-import Table from "../src/components/table";
+import { Router, Route, Font, Box, Table } from "..";
 
 export default function () {
   return (

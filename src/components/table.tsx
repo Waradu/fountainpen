@@ -36,7 +36,7 @@ export type TableProps<T extends ScalarDict> = {
   skeleton: (props: React.PropsWithChildren<{}>) => JSX.Element;
 };
 
-export default class Table<T extends ScalarDict> extends React.Component<
+export class Table<T extends ScalarDict> extends React.Component<
   Pick<TableProps<T>, "data"> & Partial<TableProps<T>>
 > {
   getConfig(): TableProps<T> {
